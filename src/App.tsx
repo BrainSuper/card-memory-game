@@ -132,7 +132,7 @@ function App() {
     return (
         <div className="App">
             <Header/>
-            <CardsList/>
+            <CardsList cards={cards} setCards={setCards}/>
         </div>
     );
 }
