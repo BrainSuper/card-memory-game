@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import CardsList from "./components/CardsList";
 import {getImages} from "./utils/getImages";
 import {ICard} from "./types/types";
+import Modal from "./components/Modal";
 
 function App() {
     const [cards, setCards] = useState<ICard[]>([
@@ -129,11 +130,15 @@ function App() {
 
         }
     ])
-
+    const [modal, setModal] = useState(true);
+    const [name, setName] = useState('');
+    const [wrongTries, setWrongTries] = useState(0);
+    const [rightTries, setRightTries] = useState(0);
     return (
         <div className="App">
-            <Header/>
-            <CardsList cards={cards} setCards={setCards}/>
+            <Header name={name} wrongTries={wrongTries}/>
+            <CardsList setRightTries={setRightTries} rightTries={rightTries} wrongTries={wrongTries} setWrongTries={setWrongTries} cards={cards} setCards={setCards}/>
+            {modal || rightTries === 10 ? <Modal rightTries={rightTries} setName={setName} setModal={setModal}/> : <></>}
         </div>
     );
 }

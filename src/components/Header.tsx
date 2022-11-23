@@ -1,11 +1,14 @@
 import React from 'react';
 import styles from '../styles/Header.module.css';
-
-const Header = () => {
+interface HeaderProps {
+    name: string;
+    wrongTries: number;
+}
+const Header = (props: HeaderProps) => {
     return (
         <div className={styles.header__wrapper}>
-            <div>Welcome#NAME#</div>
-            <div>Wrong tries: #COUNT#</div>
+            <div>Welcome {props.name}</div>
+            <div>Wrong tries: {props.wrongTries}</div>
         </div>
     );
 };

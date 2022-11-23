@@ -11,6 +11,10 @@ interface CardProps {
     setSelectedCards: (number: number) => void;
     compareCards: ICard[];
     setCompareCards: (arr: ICard[]) => void;
+    setWrongTries: (wrongTries: number) => void;
+    wrongTries: number;
+    rightTries: number;
+    setRightTries: (rightTries: number) => void;
 }
 
 const Card = (props: CardProps) => {
@@ -25,8 +29,9 @@ const Card = (props: CardProps) => {
         if (!props.card.active) return;
         props.setCompareCards([...props.compareCards, {...props.card}])
     }, [props.card.active])
+
         if (props.compareCards.length === 2 && props.compareCards[0].name === props.compareCards[1].name) {
-            console.log('same');
+            props.setRightTries(props.rightTries + 1);
             props.setSelectedCards(0);
             props.setCompareCards([]);
         } else if (props.compareCards.length === 2 && props.compareCards[0].name !== props.compareCards[1].name) {
@@ -37,6 +42,7 @@ const Card = (props: CardProps) => {
                     }
                     return {...stateCard}
                 }))
+                props.setWrongTries(props.wrongTries + 1);
                 props.setSelectedCards(0);
                 props.setCompareCards([]);
             }, 1000)
